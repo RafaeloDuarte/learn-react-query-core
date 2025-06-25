@@ -1,54 +1,45 @@
-# React + TypeScript + Vite
+# ⚛️ react-query-from-scratch
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Reimplementação das principais funcionalidades do [React Query](https://tanstack.com/query/latest) utilizando apenas React puro, com foco educacional e arquitetural.
 
-Currently, two official plugins are available:
+> 📚 Essa série foi criada para mostrar como ferramentas como o React Query funcionam por baixo dos panos — e como você pode construir soluções poderosas com hooks, contexto e lógica bem estruturada.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📺 Aulas disponíveis
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Aula | Tema                                               | Link |
+|------|----------------------------------------------------|------|
+| 0    | Chamando APIs com `fetch`                          | [YouTube](https://www.youtube.com/watch?v=mvZEk04Sfqg&t=114s&pp=0gcJCc4JAYcqIYzv) |
+| 0.1  | Criando um Hook Customizado                        | [YouTube](https://www.youtube.com/watch?v=_LfhdqNfJcQ&t=9s) |
+| 1    | Cache com Singleton                                | [YouTube](https://www.youtube.com/watch?v=hzTLT_tFsnw) |
+| 2    | TTL: Controle de expiração dos dados               | [YouTube](https://www.youtube.com/watch?v=4NB_5ZPnJHU&t=15s) |
+| 3    | Deduplicação de chamadas simultâneas               | [YouTube](https://www.youtube.com/watch?v=59t9QSATWAQ&t=16s) |
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+> 🔗 **Playlist completa:** [YouTube](#)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠 Funcionalidades implementadas
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+✅ Cache em memória com controle por URL  
+✅ Singleton para evitar múltiplas instâncias de cache  
+✅ TTL para dados expirarem automaticamente  
+✅ Deduplicação de requisições simultâneas  
+✅ Refetch automático baseado em tempo  
+✅ Refetch manual (via botão ou trigger externo)
+
+---
+
+## 💡 Tecnologias utilizadas
+
+- React (com Vite)
+- TypeScript
+- Vitest (testes unitários)
+- ShadCN UI (interface base)
+- Nenhuma lib de dados externa (sem Axios, sem React Query)
+
+---
+
+## 📁 Estrutura do projeto
+
