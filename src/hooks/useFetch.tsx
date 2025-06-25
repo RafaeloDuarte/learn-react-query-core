@@ -8,9 +8,7 @@ function useFetch<T>(url: string, poolingInterval: number = 0) {
 
     const fetchData = useCallback(async () => {
         try {
-            const res = await fetch(url)
-            if (!res.ok) throw new Error('Erro ao carregar dados')
-            const resData = await res.json()
+            const resData = await fetchCache.fetch<T>(url)
 
             fetchCache.set(url, resData)
             setData(resData)
@@ -37,7 +35,7 @@ function useFetch<T>(url: string, poolingInterval: number = 0) {
         }
     }, [])
 
-    return { data, loading, error }
+    return { data, loading, error, refetch: fetchData }
 }
 
 export default useFetch

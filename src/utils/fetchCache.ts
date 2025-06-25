@@ -1,7 +1,8 @@
 class FetchCache {
     private cache = new Map<string, { data: any, ttlMs: number }>
+    private pendingRequests = new Map<string, Promise<any>>();
 
-    get(key: string): { data: any } | null {
+    get<T>(key: string): T | null {
         const entry = this.cache.get(key) || null
         const expiry = entry?.ttlMs
 
@@ -10,7 +11,7 @@ class FetchCache {
             return null
         }
 
-        return entry
+        return entry ? entry.data as T : null
     }
 
     set(key: string, data: any) {
@@ -32,6 +33,29 @@ class FetchCache {
 
     clear(key: string) {
         this.cache.delete(key)
+    }
+
+    async fetch<T>(url: string): Promise<T> {
+        if (this.pendingRequests.has(url)) {
+            return this.pendingRequests.get(url)
+        }
+
+        const fetchData = fetch(url)
+            .then((resData) => {
+                if (!resData.ok) throw new Error('Erro ao carregar dados')
+                return resData.json()
+            })
+            .then((data: T) => {
+                this.set(url, data)
+                return data
+            })
+            .finally(() => {
+                this.pendingRequests.delete(url)
+            })
+
+        this.pendingRequests.set(url, fetchData)
+
+        return fetchData
     }
 }
 
